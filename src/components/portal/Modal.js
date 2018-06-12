@@ -18,11 +18,25 @@ class Modal extends Component {
   }
 
   render() {
+    const { isConfirmForm } = this.props;
+
+    const ConfirmForm = (
+      <div>
+        {this.props.children}
+        <button onClick={this.props.handleConfirm}>Confirm button</button>
+      </div>
+    );
+    const RegularForm = (
+      <div>
+        <button onClick={this.props.onClose}>Close [x]</button>
+        {this.props.children}
+      </div>
+    );
+
     const renderModalOverlay = this.props.showModal ? (
       <ModalOverlay>
         <ChildWrapper>
-          <button onClick={this.props.onClose}>Close modal</button>
-          {this.props.children}
+          {isConfirmForm ? ConfirmForm : RegularForm}
         </ChildWrapper>
       </ModalOverlay>
     ) : null;
@@ -36,7 +50,7 @@ export default Modal;
 const ChildWrapper = styled.div`
   background-color: #fff;
   width: 320px;
-  height: 300px;
+  height: auto;
 `;
 
 const ModalOverlay = styled.div`
