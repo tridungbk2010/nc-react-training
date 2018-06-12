@@ -6,7 +6,9 @@ import Button from './Button';
 class Login extends Component {
   onLogin = dataForm => {
     console.log(dataForm);
-    this.props.afterLoginSuccessFully();
+    if(this.props.afterLoginSuccessFully){
+      this.props.afterLoginSuccessFully();
+    }
   };
 
   render() {
